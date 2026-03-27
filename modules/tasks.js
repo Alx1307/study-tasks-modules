@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 export default {
     name: "Tasks",
     requires: ["Core", "Auth"],
@@ -193,7 +191,12 @@ export default {
                     throw error;
                 }
                 
-                const updatedTask = storage.updateTaskStatus(req.params.id, newStatus);
+                const updates = { status: newStatus };
+                if (newStatus === 2 && task.status !== 2) {
+                    updates.completedAt = clock.now();
+                }
+                
+                const updatedTask = storage.updateTask(req.params.id, updates);
                 
                 console.log(`[${clock.now()}] Пользователь ${req.user.email} изменил статус задачи на ${newStatus}`);
                 

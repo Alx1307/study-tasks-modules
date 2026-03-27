@@ -49,6 +49,7 @@ export default {
                     title: task.title,
                     description: task.description || "",
                     status: task.status !== undefined ? task.status : 0,
+                    priority: task.priority || "medium",
                     deadline: task.deadline || null,
                     createdAt: task.createdAt || new Date().toISOString()
                 };
