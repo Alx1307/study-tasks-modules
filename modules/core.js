@@ -44,16 +44,23 @@ export default {
             
             addTask(task) {
                 const newTask = {
-                    ...task,
                     id: uuidv4(),
-                    createdAt: new Date().toISOString()
+                    userId: task.userId,
+                    title: task.title,
+                    description: task.description || "",
+                    status: task.status !== undefined ? task.status : 0,
+                    deadline: task.deadline || null,
+                    createdAt: task.createdAt || new Date().toISOString()
                 };
                 this.tasks.push(newTask);
+                console.log(`  Задача добавлена в storage: ${newTask.title}, ID: ${newTask.id}`);
                 return newTask;
             },
             
             findTaskById(id) {
-                return this.tasks.find(t => t.id === id);
+                const task = this.tasks.find(t => t.id === id);
+                console.log(`  Поиск задачи ${id}: ${task ? "найдена" : "не найдена"}`);
+                return task;
             },
             
             findTasksByUserId(userId) {
