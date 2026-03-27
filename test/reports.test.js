@@ -144,7 +144,7 @@ async function testReports() {
             }
         }
 
-        console.log("Тестирование завершено успешно");
+        console.log("\nТестирование завершено успешно");
         
     } catch (error) {
         console.error("Ошибка тестирования:", error.message);
